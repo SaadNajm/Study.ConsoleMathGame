@@ -20,6 +20,7 @@ namespace MyFirstProgram
                           S - Substraction
                           M - Multiplication
                           D - Division
+                          R - Random
                           Q - Quit the program");
                 Console.WriteLine("------------------------------------------------");
 
@@ -44,7 +45,9 @@ namespace MyFirstProgram
                     case "d":
                         gameEngine.DivisionGame("Division game");
                         break;
-
+                    case "r":
+                        gameEngine.RandomGame("Random game");
+                        break;
                     case "q":
                         Console.WriteLine("GoodBye");
                         isGameOn = false;

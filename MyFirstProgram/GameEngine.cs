@@ -175,8 +175,89 @@ namespace MyFirstProgram
 
             Helpers.AddToHistory(score, GameType.Addition, difficulty, totalSeconds);
         }
+        internal void RandomGame(string message)
+        {
+            var divisionNumbers = Helpers.GetDivisionNumbers();
+            int numberOfQuestions = Helpers.numberOfQuestions();
+            var startTime = DateTime.Now;  // Capture start time
+            var difficulty = Helpers.getDifficultyLevel();
+            var random = new Random();
+            var score = 0;
 
-    }
+            for (int i = 0; i < numberOfQuestions; i++)
+            {
+                Console.Clear();
+                Console.WriteLine(message);
+
+                // Generate random operation (addition, subtraction, multiplication, or division)
+                int operation = random.Next(1, 5);  // 1-4 represents the 4 operations
+
+                int firstNumber = random.Next(1, 10 );
+                int secondNumber = random.Next(1,10);
+
+                string operationSymbol;
+                int result;
+
+                switch (operation)
+                {
+                    case 1:
+                        operationSymbol = "+";
+                        result = firstNumber + secondNumber;
+                        break;
+                    case 2:
+                        operationSymbol = "-";
+                        result = firstNumber - secondNumber;
+                        break;
+                    case 3:
+                        operationSymbol = "*";
+                        result = firstNumber * secondNumber;
+                        break;
+                    case 4:
+                        
+                        do
+                        {
+                             firstNumber = divisionNumbers[0];
+                             secondNumber = divisionNumbers[1];
+                          
+                        } while (secondNumber == 0);
+                        operationSymbol = "/";
+                        result = firstNumber / secondNumber;
+                        break;
+                    default:
+                        Console.WriteLine("An unexpected error occurred. Defaulting to addition.");
+                        operationSymbol ="+";
+                        result = firstNumber + secondNumber;
+                        break;
+                }
+
+                Console.WriteLine($"{firstNumber} {operationSymbol} {secondNumber}");
+                var userAnswer = Console.ReadLine();
+
+                while (string.IsNullOrEmpty(userAnswer) || !Int32.TryParse(userAnswer, out _))
+                {
+                    Console.WriteLine("Your answer needs to be an integer. Try again.");
+                    userAnswer = Console.ReadLine();
+                }
+
+                if (int.Parse(userAnswer) == result)
+                {
+                    Console.WriteLine("Your answer was correct! Type any key for the next question");
+                    Console.ReadLine();
+                    score++;
+                }
+                else
+                {
+                    Console.WriteLine("Your answer was incorrect. Type any key for the next question");
+                    Console.ReadLine();
+                }
+            }
+
+            var endTime = DateTime.Now;  // Capture end time
+            var totalSeconds = Math.Round((endTime - startTime).TotalSeconds, 2);  // Calculate total time
+            Helpers.AddToHistory(score, GameType.Random, difficulty, totalSeconds);
+        }
+    
+}
 
     }
 

@@ -6,52 +6,73 @@ namespace MyFirstProgram
 {
     internal class GameEngine
     {
-       internal void DivisionGame(string message)
+        internal void DivisionGame(string message)
         {
             var startTime = DateTime.Now;  // Capture start time
             var score = 0;
             var difficulty = Helpers.getDifficultyLevel();
             int numberOfQuestions = Helpers.numberOfQuestions();
-         
-                for (int i = 0; i < numberOfQuestions; i++)
+
+            var random = new Random(); // Initialize Random outside the loop
+
+            for (int i = 0; i < numberOfQuestions; i++)
+            {
+                int firstNumber, secondNumber;
+                do
                 {
-
-
-                    var divisionNumbers = Helpers.GetDivisionNumbers();
-                    var firstNumber = divisionNumbers[0];
-                    var secondNumber = divisionNumbers[1];
-                    Console.WriteLine($"{firstNumber}/{secondNumber}");
-                    var result = Console.ReadLine();
-                    
-                    if (int.Parse(result) == firstNumber / secondNumber)
+                    if (difficulty == GameDifficulty.Easy)
                     {
-                        Console.WriteLine("Your answer was correct! Type any key for the next question");
-                        Console.ReadLine();
-                        score++;
-                       
+                        firstNumber = random.Next(1, 9);
+                        secondNumber = random.Next(1, 9);
+                    }
+                    else if (difficulty == GameDifficulty.Medium)
+                    {
+                        firstNumber = random.Next(10, 50);
+                        secondNumber = random.Next(10, 50);
                     }
                     else
                     {
-                        Console.WriteLine("Your answer was incorrect. Type any key for the next question");
-                        Console.ReadLine();
-                    }
-                    if (i == numberOfQuestions-1)
-                    {
-                     
-                        Console.WriteLine($"Game over.Your final score is {score}");
+                        firstNumber = random.Next(50, 100);
+                        secondNumber = random.Next(50, 100);
                     }
                 }
-           
+                while (firstNumber % secondNumber != 0);
+
+                Console.WriteLine($"{firstNumber}/{secondNumber}");
+                var result = Console.ReadLine();
+
+                while (string.IsNullOrEmpty(result) || !Int32.TryParse(result, out _))
+                {
+                    Console.WriteLine("Your answer needs to be an integer. Try again.");
+                    result = Console.ReadLine();
+                }
+
+                if (int.Parse(result) == firstNumber / secondNumber)
+                {
+                    Console.WriteLine("Your answer was correct! Type any key for the next question");
+                    Console.ReadLine();
+                    score++;
+                }
+                else
+                {
+                    Console.WriteLine("Your answer was incorrect. Type any key for the next question");
+                    Console.ReadLine();
+                }
+
+                if (i == numberOfQuestions - 1)
+                {
+                    Console.WriteLine($"Game over.Your final score is {score}. Press any key to go back to the main menu");
+                    Console.ReadLine();
+                }
+            }
 
             var endTime = DateTime.Now;  // Capture end time
             var totalSeconds = Math.Round((endTime - startTime).TotalSeconds, 2);  // Calculate total time
 
             Helpers.AddToHistory(score, GameType.Division, difficulty, totalSeconds);
-
-
         }
 
-       
+
 
         internal void MultiplicationGame(string message)
         {
@@ -66,10 +87,28 @@ namespace MyFirstProgram
             {
                 Console.Clear();
                 Console.WriteLine(message);
-                firstNumber = random.Next(1, 9);
-                secondNumber = random.Next(1, 9);
+                if (difficulty == GameDifficulty.Easy)
+                {
+                    firstNumber = random.Next(1, 9);
+                    secondNumber = random.Next(1, 9);
+                }
+                else if(difficulty == GameDifficulty.Medium)
+                {
+                    firstNumber = random.Next(10, 50);
+                    secondNumber = random.Next(10, 50);
+                }
+                else
+                {
+                    firstNumber = random.Next(50, 100);
+                    secondNumber = random.Next(50, 100);
+                }
                 Console.WriteLine($"{firstNumber} * {secondNumber}");
                 var result = Console.ReadLine();
+                while (string.IsNullOrEmpty(result) || !Int32.TryParse(result, out _))
+                {
+                    Console.WriteLine("Your answer needs to be an integer. Try again.");
+                    result = Console.ReadLine();
+                }
                 if (int.Parse(result) == firstNumber * secondNumber)
                 {
                     Console.WriteLine("Your answer was correct! Type any key for the next question");
@@ -83,7 +122,8 @@ namespace MyFirstProgram
                 }
                 if (i == numberOfQuestions-1)
                 {
-                    Console.WriteLine($"Game over.Your final score is {score}");
+                    Console.WriteLine($"Game over.Your final score is {score}. Press any key to go back to the main menu");
+                    Console.ReadLine();
                 }
             }
             var endTime = DateTime.Now;  // Capture end time
@@ -105,10 +145,28 @@ namespace MyFirstProgram
             {
                 Console.Clear();
                 Console.WriteLine(message);
-                firstNumber = random.Next(1, 9);
-                secondNumber = random.Next(1, 9);
+                if (difficulty == GameDifficulty.Easy)
+                {
+                    firstNumber = random.Next(1, 9);
+                    secondNumber = random.Next(1, 9);
+                }
+                else if (difficulty == GameDifficulty.Medium)
+                {
+                    firstNumber = random.Next(10, 50);
+                    secondNumber = random.Next(10, 50);
+                }
+                else
+                {
+                    firstNumber = random.Next(50, 100);
+                    secondNumber = random.Next(50, 100);
+                }
                 Console.WriteLine($"{firstNumber} - {secondNumber}");
                 var result = Console.ReadLine();
+                while (string.IsNullOrEmpty(result) || !Int32.TryParse(result, out _))
+                {
+                    Console.WriteLine("Your answer needs to be an integer. Try again.");
+                    result = Console.ReadLine();
+                }
                 if (int.Parse(result) == firstNumber - secondNumber)
                 {
                     Console.WriteLine("Your answer was correct! Type any key for the next question");
@@ -122,7 +180,8 @@ namespace MyFirstProgram
                 }
                 if (i == numberOfQuestions-1)
                 {
-                    Console.WriteLine($"Game over.Your final score is {score}");
+                    Console.WriteLine($"Game over.Your final score is {score}. Press any key to go back to the main menu");
+                    Console.ReadLine();
                 }
             }
             var endTime = DateTime.Now;  // Capture end time
@@ -144,8 +203,21 @@ namespace MyFirstProgram
             {
                 Console.Clear();
                 Console.WriteLine(message);
-                firstNumber = random.Next(1, 9);
-                secondNumber = random.Next(1, 9);
+                if (difficulty == GameDifficulty.Easy)
+                {
+                    firstNumber = random.Next(1, 9);
+                    secondNumber = random.Next(1, 9);
+                }
+                else if (difficulty == GameDifficulty.Medium)
+                {
+                    firstNumber = random.Next(10, 50);
+                    secondNumber = random.Next(10, 50);
+                }
+                else
+                {
+                    firstNumber = random.Next(50, 100);
+                    secondNumber = random.Next(50, 100);
+                }
                 Console.WriteLine($"{firstNumber} + {secondNumber}");
                 var result = Console.ReadLine();
                 while(string.IsNullOrEmpty(result) || !Int32.TryParse(result, out _)) {
@@ -181,6 +253,7 @@ namespace MyFirstProgram
             int numberOfQuestions = Helpers.numberOfQuestions();
             var startTime = DateTime.Now;  // Capture start time
             var difficulty = Helpers.getDifficultyLevel();
+           
             var random = new Random();
             var score = 0;
 
@@ -192,9 +265,23 @@ namespace MyFirstProgram
                 // Generate random operation (addition, subtraction, multiplication, or division)
                 int operation = random.Next(1, 5);  // 1-4 represents the 4 operations
 
-                int firstNumber = random.Next(1, 10 );
-                int secondNumber = random.Next(1,10);
-
+                int firstNumber;
+                int secondNumber;
+                if (difficulty == GameDifficulty.Easy)
+                {
+                    firstNumber = random.Next(1, 9);
+                    secondNumber = random.Next(1, 9);
+                }
+                else if (difficulty == GameDifficulty.Medium)
+                {
+                    firstNumber = random.Next(10, 50);
+                    secondNumber = random.Next(10, 50);
+                }
+                else
+                {
+                    firstNumber = random.Next(50, 100);
+                    secondNumber = random.Next(50, 100);
+                }
                 string operationSymbol;
                 int result;
 

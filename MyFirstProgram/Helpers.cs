@@ -89,8 +89,13 @@ namespace MyFirstProgram
         internal static int numberOfQuestions()
         {
             Console.WriteLine("How many questions you want to answer while playing this game?");
-            int numberOfQuestions = int.Parse(Console.ReadLine());
-            return numberOfQuestions;
+            var numberOfQuestions = Console.ReadLine();
+            while (string.IsNullOrEmpty(numberOfQuestions) || !Int32.TryParse(numberOfQuestions, out _))
+            {
+                Console.WriteLine("Your answer needs to be an integer. Try again.");
+                numberOfQuestions = Console.ReadLine();
+            }
+            return int.Parse(numberOfQuestions);
         }
     }
 }

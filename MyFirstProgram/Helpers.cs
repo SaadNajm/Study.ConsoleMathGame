@@ -10,7 +10,7 @@ namespace MyFirstProgram
     internal class Helpers
     {
         internal static List<Game> games = new();
-     
+        
         internal static void GetGames()
         {
            // var gamesToPrint = games.Where(x => x.Type == GameType.Multiplication);
@@ -20,7 +20,7 @@ namespace MyFirstProgram
             Console.WriteLine("---------------------------------");
             foreach (var game in games)
             {
-                Console.WriteLine($"{game.Date} - {game.Type}: {game.Score}pts -game difficulty : {game.Difficulty}");
+                Console.WriteLine($"{game.Date} - {game.Type}: {game.Score}pts -game difficulty : {game.Difficulty} - time while playing in seconds : {game.secondsInGame}");
             }
             Console.WriteLine("---------------------------------\n");
             Console.WriteLine("Press any key to go back to the main menu");
@@ -60,10 +60,10 @@ namespace MyFirstProgram
 
         }
 
-        internal static void AddToHistory(int gameScore, GameType gameType, GameDifficulty difficulty)
+        internal static void AddToHistory(int gameScore, GameType gameType, GameDifficulty difficulty, double time)
         {
        
-            games.Add(new Game { Date = DateTime.Now, Score = gameScore, Type = gameType, Difficulty = difficulty});
+            games.Add(new Game { Date = DateTime.Now, Score = gameScore, Type = gameType, Difficulty = difficulty,secondsInGame=time});
         }
 
         internal static int[] GetDivisionNumbers()

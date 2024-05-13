@@ -12,6 +12,7 @@ internal class Game
     public int Score { get; set; }
     public GameType Type { get; set; }
     public GameDifficulty Difficulty { get; set; }
+    public double secondsInGame { get; set; }
 }
 internal enum GameType
 {

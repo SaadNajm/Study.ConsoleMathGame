@@ -1,0 +1,90 @@
+﻿using MyFirstProgram.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MyFirstProgram
+{
+    internal class Helpers
+    {
+        internal static List<Game> games = new();
+     
+        internal static void GetGames()
+        {
+           // var gamesToPrint = games.Where(x => x.Type == GameType.Multiplication);
+            Console.Clear();
+
+            Console.WriteLine("Game history");
+            Console.WriteLine("---------------------------------");
+            foreach (var game in games)
+            {
+                Console.WriteLine($"{game.Date} - {game.Type}: {game.Score}pts -game difficulty : {game.Difficulty}");
+            }
+            Console.WriteLine("---------------------------------\n");
+            Console.WriteLine("Press any key to go back to the main menu");
+            Console.ReadLine();
+        }
+        internal static GameDifficulty getDifficultyLevel()
+        {
+           GameDifficulty difficulty=GameDifficulty.Easy; //by default
+            Console.WriteLine($@"What difficulty level do you want to play at: 
+
+             E - Easy
+             M - Medium
+             H - Hard
+");
+            var answer=Console.ReadLine();
+            if (answer!="E" && answer != "M" && answer != "H")
+            {
+                Console.WriteLine("Please type E for easy , M for Medium , H for hard");
+                answer = Console.ReadLine();
+            }
+            if(answer == "E")
+            {
+                Console.WriteLine($"you choose {GameDifficulty.Easy} level");
+                difficulty = GameDifficulty.Easy;
+            }
+            else if (answer == "M")
+            {
+                Console.WriteLine($"you choose {GameDifficulty.Medium} level");
+                difficulty = GameDifficulty.Medium;
+            }
+            else if (answer == "H")
+            {
+                Console.WriteLine($"you choose {GameDifficulty.Hard} level");
+                difficulty = GameDifficulty.Hard;
+            }
+            return difficulty;
+
+        }
+
+        internal static void AddToHistory(int gameScore, GameType gameType, GameDifficulty difficulty)
+        {
+       
+            games.Add(new Game { Date = DateTime.Now, Score = gameScore, Type = gameType, Difficulty = difficulty});
+        }
+
+        internal static int[] GetDivisionNumbers()
+        {
+            var random = new Random();
+            var firstNumber = random.Next(1, 99);
+            var secondNumber = random.Next(1, 99);
+
+            var result = new int[2];
+
+
+            while (firstNumber % secondNumber != 0)
+            {
+                firstNumber = random.Next(1, 99);
+                secondNumber = random.Next(1, 99);
+            }
+            result[0] = firstNumber;
+            result[1] = secondNumber;
+
+            return result;
+
+        }
+    }
+}

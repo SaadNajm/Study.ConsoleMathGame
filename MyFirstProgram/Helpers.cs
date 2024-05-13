@@ -36,22 +36,22 @@ namespace MyFirstProgram
              H - Hard
 ");
             var answer=Console.ReadLine();
-            if (answer!="E" && answer != "M" && answer != "H")
+            if (answer.ToLower() != "e" && answer.ToLower() != "m" && answer.ToLower() != "h")
             {
                 Console.WriteLine("Please type E for easy , M for Medium , H for hard");
                 answer = Console.ReadLine();
             }
-            if(answer == "E")
+            if(answer.ToLower() == "e")
             {
                 Console.WriteLine($"you choose {GameDifficulty.Easy} level");
                 difficulty = GameDifficulty.Easy;
             }
-            else if (answer == "M")
+            else if (answer.ToLower() == "m")
             {
                 Console.WriteLine($"you choose {GameDifficulty.Medium} level");
                 difficulty = GameDifficulty.Medium;
             }
-            else if (answer == "H")
+            else if (answer.ToLower() == "h")
             {
                 Console.WriteLine($"you choose {GameDifficulty.Hard} level");
                 difficulty = GameDifficulty.Hard;
@@ -85,6 +85,12 @@ namespace MyFirstProgram
 
             return result;
 
+        }
+        internal static int numberOfQuestions()
+        {
+            Console.WriteLine("How many questions you want to answer while playing this game?");
+            int numberOfQuestions = int.Parse(Console.ReadLine());
+            return numberOfQuestions;
         }
     }
 }

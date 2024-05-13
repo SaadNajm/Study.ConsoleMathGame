@@ -9,12 +9,11 @@ namespace MyFirstProgram
        internal void DivisionGame(string message)
         {
             var startTime = DateTime.Now;  // Capture start time
-            var whileGameIsOn = true;
             var score = 0;
             var difficulty = Helpers.getDifficultyLevel();
-            do
-            {
-                for (int i = 0; i < 5; i++)
+            int numberOfQuestions = Helpers.numberOfQuestions();
+         
+                for (int i = 0; i < numberOfQuestions; i++)
                 {
 
 
@@ -36,13 +35,13 @@ namespace MyFirstProgram
                         Console.WriteLine("Your answer was incorrect. Type any key for the next question");
                         Console.ReadLine();
                     }
-                    if (i == 1)
+                    if (i == numberOfQuestions-1)
                     {
-                        whileGameIsOn = false;
+                     
                         Console.WriteLine($"Game over.Your final score is {score}");
                     }
                 }
-            }while( whileGameIsOn );
+           
 
             var endTime = DateTime.Now;  // Capture end time
             var totalSeconds = Math.Round((endTime - startTime).TotalSeconds, 2);  // Calculate total time
@@ -56,13 +55,14 @@ namespace MyFirstProgram
 
         internal void MultiplicationGame(string message)
         {
+            int numberOfQuestions = Helpers.numberOfQuestions();
             var startTime = DateTime.Now;  // Capture start time
             var difficulty = Helpers.getDifficultyLevel();
             var random = new Random();
             var score = 0;
             int firstNumber;
             int secondNumber;
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < numberOfQuestions; i++)
             {
                 Console.Clear();
                 Console.WriteLine(message);
@@ -81,7 +81,7 @@ namespace MyFirstProgram
                     Console.WriteLine("Your answer was incorrect. Type any key for the next question");
                     Console.ReadLine();
                 }
-                if (i == 4)
+                if (i == numberOfQuestions-1)
                 {
                     Console.WriteLine($"Game over.Your final score is {score}");
                 }
@@ -94,13 +94,14 @@ namespace MyFirstProgram
 
         internal void SubstractionGame(string message)
         {
+            int numberOfQuestions = Helpers.numberOfQuestions();
             var startTime = DateTime.Now;  // Capture start time
             var difficulty = Helpers.getDifficultyLevel();
             var random = new Random();
             var score = 0;
             int firstNumber;
             int secondNumber;
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < numberOfQuestions; i++)
             {
                 Console.Clear();
                 Console.WriteLine(message);
@@ -119,7 +120,7 @@ namespace MyFirstProgram
                     Console.WriteLine("Your answer was incorrect. Type any key for the next question");
                     Console.ReadLine();
                 }
-                if (i == 4)
+                if (i == numberOfQuestions-1)
                 {
                     Console.WriteLine($"Game over.Your final score is {score}");
                 }
@@ -132,13 +133,14 @@ namespace MyFirstProgram
 
         internal void AdditionGame(string message)
         {
+            int numberOfQuestions = Helpers.numberOfQuestions();
             var startTime = DateTime.Now;  // Capture start time
             var difficulty = Helpers.getDifficultyLevel();
             var random = new Random();
             var score = 0;
             int firstNumber;
             int secondNumber;
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < numberOfQuestions; i++)
             {
                 Console.Clear();
                 Console.WriteLine(message);
@@ -161,7 +163,7 @@ namespace MyFirstProgram
                     Console.WriteLine("Your answer was incorrect. Type any key for the next question");
                     Console.ReadLine();
                 }
-                if (i == 4)
+                if (i == numberOfQuestions-1)
                 {
                     Console.WriteLine($"Game over.Your final score is {score}. Press any key to go back to the main menu");
                     Console.ReadLine();
